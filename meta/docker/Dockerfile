@@ -38,6 +38,7 @@ ENV XDG_CACHE_HOME=/root/.cache
 RUN mkdir -p /root/.local/share/opencode /root/.config/gh /root/.config/opencode /root/.cache/opencode /root/.ssh/keys /workspace
 COPY meta/docker/auth/${OPENCODE_PROFILE_FILE} /root/.local/share/opencode/auth.json
 COPY meta/docker/config/${OPENCODE_CONFIG_FILE} /root/.config/opencode/opencode.json
+COPY meta/docker/opencode/AGENTS.local.md /root/.config/opencode/AGENTS.md
 COPY meta/docker/cache/models.local.json /root/.cache/opencode/models.json
 COPY meta/docker/gh/hosts.local.yml /root/.config/gh/hosts.yml
 COPY meta/docker/gh/token.local /tmp/gh-token
@@ -45,15 +46,17 @@ COPY meta/docker/ssh/config.local /root/.ssh/config
 COPY meta/docker/ssh/known_hosts.local /root/.ssh/known_hosts
 COPY meta/docker/ssh/keys/github /root/.ssh/keys/github
 COPY meta/docker/TASK_V1.md /workspace/meta/docker/TASK_V1.md
+COPY meta/docker/TASK_AGENTS_V1.md /workspace/meta/docker/TASK_AGENTS_V1.md
 COPY meta/docker/FRICTION_V1.md /workspace/meta/docker/FRICTION_V1.md
 COPY meta/docker/RESULT_V1.md /workspace/meta/docker/RESULT_V1.md
 COPY meta/docker/run-task-v1.sh /usr/local/bin/run-task-v1
 COPY meta/docker/run-opencode-task-v1.sh /usr/local/bin/run-opencode-task-v1
+COPY meta/docker/run-opencode-agents-smoke-v1.sh /usr/local/bin/run-opencode-agents-smoke-v1
 RUN chmod 700 /root/.ssh \
   && chmod 600 /root/.local/share/opencode/auth.json /root/.config/gh/hosts.yml /root/.ssh/config /root/.ssh/known_hosts /root/.ssh/keys/github /tmp/gh-token \
   && chmod 644 /root/.cache/opencode/models.json
 RUN gh auth login --hostname github.com --with-token < /tmp/gh-token && rm -f /tmp/gh-token
-RUN chmod 0755 /usr/local/bin/run-task-v1 /usr/local/bin/run-opencode-task-v1
+RUN chmod 0755 /usr/local/bin/run-task-v1 /usr/local/bin/run-opencode-task-v1 /usr/local/bin/run-opencode-agents-smoke-v1
 
 ENV CONSENSUS_REPO_URL="git@github.com:powerformer/consensus.git"
 ENV COWORK_HOME="/workspace/.cowork"

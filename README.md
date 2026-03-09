@@ -84,3 +84,11 @@ cowork clone metadata
 
 - `cowork clone preview` / `cowork clone contribute` / `cowork clone resource` 都是 guide-only 命令：只打印建议与关键元信息，不自动执行、不做状态变更。
 - `cowork clone version` 的远端 `package.json` 地址可通过 `COWORK_CLONE_PACKAGE_URL` 覆盖；远端不可达时命令会失败退出。
+
+## Team Bootstrap Check
+
+```bash
+bash scripts/bootstrap.sh
+```
+
+This check reports only verifiable local facts (tool availability, auth status, SSH handshake, and repo reachability) and exits non-zero when action is still needed.

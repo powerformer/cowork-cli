@@ -9,6 +9,7 @@
 - `src/bin/`: CLI 入口（参数与子命令分发）。
 - `src/commands/`: 命令实现。
 - `src/config.rs`: `COWORK_*` 环境变量与默认值。
+- `scripts/`: 辅助脚本（如团队冷启动 bootstrap 检查）。
 - `tests/`: 命令级 smoke tests。
 - `.github/workflows/`: CI 与 release 工作流。
 - `install.sh`: 发布资产安装脚本。
@@ -23,6 +24,8 @@
 - `meta/docker/FRICTION_V1.md`: 冷启动摩擦记录。
 - `meta/docker/RESULT_V1.md`: 首轮任务结果记录。
 - `meta/subagent/questions.md`: 问题库索引与新增模板。
+- `meta/subagent/AGENTS_SMOKE_V1.md`: AGENTS 引导冷启动冒烟方案。
+- `meta/subagent/AGENTS_SMOKE_RESULT.md`: AGENTS 引导冒烟结果记录。
 - `meta/subagent/validation.md`: 产品视角冷启动验证流程与记录模板。
 - `meta/subagent/acceptance.md`: 验收标准与通过判定模板。
 - `meta/subagent/evaluation.md`: 评估指标与自检闭环。
@@ -47,6 +50,7 @@
 - `cargo run -- clone --help`
 - `cargo run -- clone metadata`
 - `cargo run -- clone preview`
+- `bash scripts/bootstrap.sh`
 
 ## 发布约定
 
