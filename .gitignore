@@ -1,2 +1,9 @@
 target/
 meta/docker/auth/auth.local.json
+meta/docker/config/config.local.json
+meta/docker/gh/token.local
+meta/docker/gh/hosts.local.yml
+meta/docker/ssh/config.local
+meta/docker/ssh/known_hosts.local
+meta/docker/ssh/keys/github
+meta/docker/cache/models.local.json

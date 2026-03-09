@@ -16,8 +16,12 @@
 ## Meta 索引
 
 - `meta/docker/Dockerfile`: 冷启动验证基础镜像定义。
+- `docker-compose.yml`: Docker 冷启动任务入口。
 - `meta/docker/run-coldstart-hello.sh`: 最小 cold-start hello 验证脚本。
 - `meta/docker/run-coldstart-local.sh`: 本地私有 auth 注入验证脚本。
+- `meta/docker/TASK_V1.md`: 首轮 agent 任务描述。
+- `meta/docker/FRICTION_V1.md`: 冷启动摩擦记录。
+- `meta/docker/RESULT_V1.md`: 首轮任务结果记录。
 - `meta/subagent/questions.md`: 问题库索引与新增模板。
 - `meta/subagent/validation.md`: 产品视角冷启动验证流程与记录模板。
 - `meta/subagent/acceptance.md`: 验收标准与通过判定模板。
@@ -29,6 +33,13 @@
 - 必要配置与资源文件通过 Dockerfile `COPY` 进入容器。
 - SQLite 等状态数据必须与宿主机隔离，避免污染本地环境。
 
+## Docker 验证策略
+
+- Docker 验证资产统一维护在 `cowork-cli`，目标知识仓库仅作为被验证对象。
+- 容器只注入最小上下文：目标 repo URL、`cowork` 安装入口、任务描述，以及必要私有认证/模型配置。
+- 优先验证 agent 是否能零摩擦进入 `cowork` 体系，再观察真实卡点，不提前为向下兼容做妥协。
+- 细节模板、任务脚本、摩擦记录统一索引到 `meta/docker/`。
+
 ## 常用命令
 
 - `cargo test`
@@ -37,10 +48,16 @@
 - `cargo run -- clone metadata`
 - `cargo run -- clone preview`
 
+## 发布约定
+
+- 正式发布 tag：`cowork-v<version>`
+- Beta 发布 tag：`cowork-v<version>-beta`
+- 发布前必须补对应 changelog：`docs/changelog/<tag>.md`
+
 ## 常见问题
 
 - **`clone init` 失败**：检查 `COWORK_CLONE_REPO_URL` 是否已设置。
 - **`clone update/metadata` 失败**：检查目标路径 `COWORK_HOME/clones/COWORK_CLONE_REPO_ALIAS` 是否存在。
 - **`clone version` 远端获取失败**：检查 `COWORK_CLONE_PACKAGE_URL` 是否可访问；该命令在远端不可达时会失败退出。
-- **`clone preview` 只有文本建议**：该命令是 guide-only，不会自动启动 tmux 或预览进程。
+- **`clone preview/contribute/resource` 都只有文本建议**：这些命令是 guide-only，只打印建议与关键元信息，不会自动执行。
 - **`self-update` 失败**：检查 `install.sh` 地址可访问，以及当前平台是否有对应 release 资产。

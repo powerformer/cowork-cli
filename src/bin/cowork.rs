@@ -47,11 +47,11 @@ enum CloneCommands {
     Update,
     /// Show clone metadata and tree
     Metadata,
-    /// Start preview in tmux session
+    /// Print guide-only preview suggestions and metadata
     Preview,
-    /// Print worktree-based contribution flow
+    /// Print guide-only contribution flow and metadata
     Contribute,
-    /// Print undefined resource convention guide
+    /// Print guide-only resource convention and metadata
     Resource,
 }
 
