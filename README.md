@@ -3,6 +3,8 @@
 `cowork-cli` 不是业务平台，也不是通用脚手架；它只解决知识仓库协作的冷启动一致性。
 我们以最小闭环（仅 `self-update` + `clone` 命令组）为先：先稳定冷启动路径（拉起、同步、预览、贡献），再讨论扩展。
 
+- Changelog: `docs/changelog.md`
+
 ## 自举迭代（第一原则）
 
 `cowork` 的首要哲学是“左脚踩右脚”：先用 `cowork` 改进 `cowork`，再外溢到其他知识仓库。
@@ -56,9 +58,9 @@
 - `cowork clone init`：让 agent 在标准路径创建可复现工作副本，降低环境歧义。
 - `cowork clone update`：让 agent 用 `--ff-only` 保持历史线性，减少自动化冲突与回滚复杂度。
 - `cowork clone metadata`：让 agent 快速读取仓库结构与元信息，先理解上下文再行动。
-- `cowork clone preview`：让 agent 获取预览执行建议与关键元信息（路径/命令/session）。
-- `cowork clone contribute`：让 agent 输出统一贡献流程，减少临场发明流程导致的偏差。
-- `cowork clone resource`：让 agent 把未结构化高价值材料先落盘，避免上下文信息丢失。
+- `cowork clone preview`：让 agent 获取 guide-only 的预览建议与关键元信息（路径/命令/session），不自动执行。
+- `cowork clone contribute`：让 agent 获取 guide-only 的统一贡献流程与关键元信息，不自动执行。
+- `cowork clone resource`：让 agent 获取 guide-only 的资源归档约定与关键元信息，不自动落盘。
 
 ## 实践入口（极简）
 
@@ -76,9 +78,9 @@ cowork clone metadata
 - 更新：`cowork self-update`
 - 同步：`cowork clone init` / `cowork clone update` / `cowork clone version`
 - 观察：`cowork clone metadata` / `cowork clone preview`
-- 协作：`cowork clone contribute` / `cowork clone resource`
+- 协作指引：`cowork clone contribute` / `cowork clone resource`
 
 补充：
 
-- `cowork clone preview` / `cowork clone contribute` / `cowork clone resource` 是 guide-only 命令：只打印建议与关键元信息，不做状态变更。
+- `cowork clone preview` / `cowork clone contribute` / `cowork clone resource` 都是 guide-only 命令：只打印建议与关键元信息，不自动执行、不做状态变更。
 - `cowork clone version` 的远端 `package.json` 地址可通过 `COWORK_CLONE_PACKAGE_URL` 覆盖；远端不可达时命令会失败退出。

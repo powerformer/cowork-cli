@@ -1,9 +1,9 @@
-name: Release
+name: Release Beta
 
 on:
   push:
     tags:
-      - "cowork-v*"
+      - "cowork-v*-beta"
 
 permissions:
   contents: write
@@ -40,7 +40,7 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
           set -euo pipefail
-          crate_version="$(
+          crate_version="$({
             awk '
               BEGIN { in_package=0 }
               /^\[package\]/ { in_package=1; next }
@@ -52,12 +52,12 @@ jobs:
                 exit
               }
             ' Cargo.toml
-          )"
+          })"
           if [[ -z "${crate_version}" ]]; then
             echo "failed to parse package.version from Cargo.toml" >&2
             exit 1
           fi
-          expected_tag="cowork-v${crate_version}"
+          expected_tag="cowork-v${crate_version}-beta"
           if [[ "${TAG}" != "${expected_tag}" ]]; then
             echo "tag/version mismatch: got ${TAG}, expected ${expected_tag}" >&2
             exit 1
@@ -106,7 +106,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-${{ matrix.target }}
+          name: release-beta-${{ matrix.target }}
           path: |
             dist/*.tar.gz
             dist/checksums.txt
@@ -149,9 +149,10 @@ jobs:
           verify_asset "cowork-${VERSION}-x86_64-unknown-linux-gnu.tar.gz"
           verify_asset "cowork-${VERSION}-x86_64-unknown-linux-musl.tar.gz"
 
-      - name: Publish GitHub release
+      - name: Publish GitHub beta release
         uses: softprops/action-gh-release@v2
         with:
+          prerelease: true
           files: |
             dist/**/*.tar.gz
             dist/checksums.txt

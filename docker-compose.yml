@@ -1,0 +1,25 @@
+services:
+  opencode-task:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: meta/docker/Dockerfile
+      args:
+        OPENCODE_PROFILE_FILE: auth.local.json
+        OPENCODE_CONFIG_FILE: config.local.json
+    image: cowork-opencode-task:latest
+    environment:
+      CONSENSUS_REPO_URL: git@github.com:powerformer/consensus.git
+      COWORK_HOME: /workspace/.cowork
+      COWORK_CLONE_REPO_URL: git@github.com:powerformer/consensus.git
+      COWORK_CLONE_REPO_ALIAS: consensus
+      COWORK_INSTALL_URL: https://raw.githubusercontent.com/powerformer/cowork-cli/main/install.sh
+    command:
+      - bash
+      - -lc
+      - |
+        opencode --version
+        opencode auth list
+        gh --version
+        printf 'repo_url=%s\ncowork_home=%s\ncowork_clone_repo_url=%s\ncowork_clone_repo_alias=%s\ninstall_url=%s\n' "$$CONSENSUS_REPO_URL" "$$COWORK_HOME" "$$COWORK_CLONE_REPO_URL" "$$COWORK_CLONE_REPO_ALIAS" "$$COWORK_INSTALL_URL"
+        printf 'task_prompt=%s\n' '/workspace/meta/docker/TASK_V1.md'

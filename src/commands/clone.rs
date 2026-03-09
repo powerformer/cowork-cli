@@ -137,10 +137,11 @@ pub fn run_preview() -> Result<()> {
         );
         println!("WARN: run `cowork clone init` first.");
     }
-    println!("Preview guidance (print-only)");
+    println!("Preview guidance (guide-only, print-only)");
     println!("clone path: {}", path.display());
     println!("preview command: {}", preview_cmd);
     println!("tmux session: {}", session);
+    println!("execution: manual only");
     println!();
     println!("Suggested manual flow:");
     println!("1) cd {}", path.display());
@@ -166,7 +167,9 @@ pub fn run_contribute() -> Result<()> {
         );
         println!("WARN: run `cowork clone init` first.");
     }
-    println!("Worktree contribution flow (print-only)");
+    println!("Worktree contribution flow (guide-only, print-only)");
+    println!("clone path: {}", path.display());
+    println!("execution: manual only");
     println!("1) Ensure base clone exists at: {}", path.display());
     println!("2) Create a branch worktree for your task");
     println!("3) Work in the worktree, commit, and open a PR");
@@ -203,8 +206,9 @@ pub fn run_resource() -> Result<()> {
         );
         println!("WARN: run `cowork clone init` first.");
     }
-    println!("Undefined resource guide (print-only)");
+    println!("Undefined resource guide (guide-only, print-only)");
     println!("root: {}", resources_root.display());
+    println!("execution: manual only");
     println!();
     println!("Convention:");
     println!("- Store raw materials under clone/resources/<ts>/<contributor>/...");

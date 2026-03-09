@@ -44,6 +44,9 @@ fn clone_subcommand_help_works() {
     assert!(text.contains("preview"));
     assert!(text.contains("contribute"));
     assert!(text.contains("resource"));
+    assert!(text.contains("guide-only preview suggestions and metadata"));
+    assert!(text.contains("guide-only contribution flow and metadata"));
+    assert!(text.contains("guide-only resource convention and metadata"));
 }
 
 #[test]
@@ -98,6 +101,7 @@ fn clone_contribute_succeeds_with_warning_when_clone_missing() {
     let text = String::from_utf8_lossy(&output);
     assert!(text.contains("WARN: guide-only command"));
     assert!(text.contains("run `cowork clone init` first"));
+    assert!(text.contains("execution: manual only"));
 }
 
 #[test]
@@ -116,6 +120,7 @@ fn clone_resource_succeeds_with_warning_when_clone_missing() {
     let text = String::from_utf8_lossy(&output);
     assert!(text.contains("WARN: guide-only command"));
     assert!(text.contains("run `cowork clone init` first"));
+    assert!(text.contains("execution: manual only"));
 }
 
 #[test]
@@ -134,7 +139,8 @@ fn clone_preview_succeeds_with_warning_when_clone_missing() {
     let text = String::from_utf8_lossy(&output);
     assert!(text.contains("WARN: guide-only command"));
     assert!(text.contains("run `cowork clone init` first"));
-    assert!(text.contains("Preview guidance (print-only)"));
+    assert!(text.contains("Preview guidance (guide-only, print-only)"));
+    assert!(text.contains("execution: manual only"));
 }
 
 #[test]
