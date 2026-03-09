@@ -7,3 +7,4 @@ meta/docker/ssh/config.local
 meta/docker/ssh/known_hosts.local
 meta/docker/ssh/keys/github
 meta/docker/cache/models.local.json
+meta/docker/opencode/AGENTS.local.md
