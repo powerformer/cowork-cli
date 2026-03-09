@@ -10,7 +10,6 @@
 - `src/commands/`: 命令实现。
 - `src/config.rs`: `COWORK_*` 环境变量与默认值。
 - `bootstrap.sh`: 团队冷启动入口检查脚本。
-- `scripts/`: 辅助脚本实现。
 - `tests/`: 命令级 smoke tests。
 - `.github/workflows/`: CI 与 release 工作流。
 - `install.sh`: 发布资产安装脚本。
